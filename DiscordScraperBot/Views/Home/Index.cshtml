@@ -1,0 +1,103 @@
+﻿@{
+    @model List<MessageChannell>
+    MessageChannell messageChannell = ViewBag.Channel;
+    ViewData["Title"] = "Discord Scraper";
+}
+
+<div class="sidebar">
+    <h2>Servers</h2>
+    <a asp-action="Refresh" class="btn btn-primary">Refresh list</a>
+    @foreach (MessageChannell channell in Model)
+    {
+        <a asp-action="Index" asp-route-channelName="@channell.Name" class="btn btn-primary">@channell.Name</a>
+    }
+</div>
+<div class="chat">
+    <div class="chat-header">
+        @if (messageChannell != null)
+        {
+            <h2>#@messageChannell.Name</h2>
+        }
+        else
+        {
+            <h2>#Men</h2>
+        }
+    </div>
+    <div class="chat-messages">
+        @if (messageChannell != null)
+        {
+            foreach (Message message in messageChannell.Messages)
+            {
+                if (message.Attachments.Count > 0)
+                {
+                    <div class="message">
+                        <div class="author">@message.Author</div>
+                        <div style="text-align:end" class="author">@message.Date</div>
+                        <div class="content">@message.Content</div>
+                        <div class="content">
+                            @foreach (Discord.IAttachment attachment in message.Attachments)
+                            {
+
+                                if (attachment.Filename.EndsWith(".mp4"))
+                                {
+                                    <video src="@attachment.Url" controls="controls"></video>
+                                }
+                                else
+                                {
+                                    <img src="@attachment.Url" alt="Photo" />
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    if (message.Content.StartsWith("https://"))
+                    {
+                        if (message.Content.Length > 50)
+                        {
+                            <div class="message">
+                                <div class="author">@message.Author</div>
+                                <div style="text-align:end" class="author">@message.Date</div>
+                                <div class="content">
+                                    <a href="@message.Content">@message.Content.Substring(0, 50)</a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="message">
+                                <div class="author">@message.Author</div>
+                                <div style="text-align:end" class="author">@message.Date</div>
+                                <div class="content">
+                                    <a href="@message.Content">@message.Content</a>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="message">
+                            <div class="author">@message.Author</div>
+                            <div style="text-align:end" class="author">@message.Date</div>
+                            <div class="content">@message.Content</div>
+                        </div>
+                    }
+                }
+            }
+        }
+    </div>
+    <div class="chat-input">
+        <form method="post" asp-action="Send">
+            <input type="text" name="message" placeholder="Type a message..." required />
+            <input type="hidden" name="channelId" value="@messageChannell?.Id" />
+            <input type="submit" value="Send" />
+        </form>
+        <form method="post" enctype="multipart/form-data" asp-action="Upload">
+            <input type="file" id="file" name="file" accept="*/*">
+            <input type="text" id="message" name="message" placeholder="Optional message">
+            <input type="hidden" name="channelId" value="@messageChannell?.Id" />
+            <input type="submit" value="Upload" />
+        </form>
+    </div>
+</div>

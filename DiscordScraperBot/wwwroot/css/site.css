@@ -1,0 +1,202 @@
+/* General Reset */
+body {
+    margin: 0;
+    font-family: "Arial", sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: #36393f; /* Discord's main background color */
+    color: white;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #2f3136; /* Sidebar background */
+    color: #b9bbbe; /* Sidebar text color */
+    width: 20%; /* Sidebar width */
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: white; /* Bright text for the header */
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #b9bbbe;
+    padding: 10px;
+    border-radius: 5px;
+    display: block;
+    font-weight: bold;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar a:hover {
+background-color: #40444b; /* Highlighted background on hover */
+color: white;
+}
+
+/* Chat Section */
+.chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Chat Header */
+.chat-header {
+    background-color: #2f3136; /* Header background */
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #202225;
+}
+
+.chat-header h2 {
+    font-size: 1.2em;
+    margin: 0;
+    color: white;
+}
+
+.chat-header a {
+    text-decoration: none;
+    color: white;
+    background-color: #5865f2; /* Discord button color */
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.chat-header a:hover {
+    background-color: #4752c4;
+}
+
+/* Chat Messages */
+.chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto; /* Enables scrolling for messages */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+/* Individual Message */
+.message {
+    background-color: #40444b; /* Message bubble background */
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    word-wrap: break-word; /* Prevent overflow of long words */
+}
+
+.message .author {
+    font-weight: bold;
+    color: #b9bbbe; /* Author text color */
+}
+
+.message .content {
+    color: white; /* Message text color */
+}
+
+.message .content a{
+    color: lightblue; /* Message text color */
+}
+
+.message .content a:hover{
+    color: blue; /* Message text color */
+}
+
+/* Chat Input */
+.chat-input {
+    background-color: #2f3136; /* Input background */
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    align-items: center;
+    border-top: 1px solid #202225;
+}
+
+.chat-input input{
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #40444b;
+    color: white;
+}
+
+.chat-input form {
+    display: flex;
+    flex-wrap: wrap; /* Ensure elements wrap on smaller screens */
+    align-items: center; /* Center items vertically */
+    gap: 10px; /* Space between elements */
+}
+
+.chat-input input[type="file"]::-webkit-file-upload-button {
+    background-color: #5865f2; /* Discord button blue for file button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.chat-input input::placeholder {
+    color: #b9bbbe; /* Placeholder text color */
+}
+
+.chat-input input:focus {
+    outline: none;
+}
+
+.chat-input input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #5865f2; /* Button background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.chat-input input[type="submit"]:hover {
+    background-color: #4752c4; /* Hover state for the button */
+}
+
+/* Scrollbar Styling */
+.chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background-color: #202225;
+    border-radius: 5px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background-color: #40444b;
+}
+
+img {
+    width: auto;
+    max-height: 600px;
+    max-width: 900px;
+    border-radius: 5px;
+}
+video {
+    width: auto;
+    max-height: 600px;
+    max-width: 900px;
+    border-radius: 5px;
+}
